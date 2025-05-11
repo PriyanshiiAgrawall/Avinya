@@ -1,9 +1,14 @@
 import dotenv from 'dotenv';
+// dotenv.config();
 dotenv.config();
-
+import doctorRouter from "./Routes/doctorRouter.js"
+import patientRouter from "./Routes/patientRouter.js"
+import appointmentRouter from "./Routes/appointmentRouter.js"
 import express from "express";
 import { dbConnect } from './db/db.js';
-// import cors from 'cors';
+import cors from 'cors';
+
+
 // import passport from './lib/passport.js'
 // import session from 'express-session';
 
@@ -46,5 +51,10 @@ const server = () => {
         console.log("Listening to port", Port);
     });
 };
+
+app.use('/api/doctor/', doctorRouter);
+app.use('/api/patient/', patientRouter);
+app.use('/api/appointment/', appointmentRouter)
+// Debug environment variables
 
 server();

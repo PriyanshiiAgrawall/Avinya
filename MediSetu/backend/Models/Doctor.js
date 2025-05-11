@@ -67,6 +67,13 @@ const doctorSchema = new mongoose.Schema({
     about: {
         type: String,
         default: "hello,I am a Doctor"
+    },
+    profilePic: {
+        type: String,
+    },
+    qualification: {
+        type: String,
+        required: true,
     }
 }, {
     timestamps: true

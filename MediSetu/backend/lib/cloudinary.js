@@ -1,13 +1,23 @@
+import dotenv from 'dotenv';
+
+// Ensure environment variables are loaded
+dotenv.config();
+
 import { v2 as cloudinary } from "cloudinary";
 import sharp from "sharp";
 import crypto from "crypto";
 
+// Debug environment variables at the very start
+console.log('Environment Variables Check:', {
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ? 'exists' : 'missing'
+});
+
 // Function to generate the signature for secure upload
 function generateSignature(params) {
     const apiSecret = process.env.CLOUDINARY_API_SECRET;
-    if (!apiSecret) {
-        throw new Error("CLOUDINARY_API_SECRET is missing");
-    }
+
 
     // Step 1: Sort parameters alphabetically and format as `key=value`
     const sortedParams = Object.keys(params)
@@ -19,12 +29,69 @@ function generateSignature(params) {
     return crypto.createHash("sha1").update(`${sortedParams}${apiSecret}`).digest("hex");
 }
 
+// Initialize Cloudinary configuration
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = process.env.CLOUDINARY_API_KEY;
+const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+if (!cloudName || !apiKey || !apiSecret) {
+    // throw new Error(`Missing Cloudinary configuration. Cloud Name: ${cloudName ? 'exists' : 'missing'}, API Key: ${apiKey ? 'exists' : 'missing'}, API Secret: ${apiSecret ? 'exists' : 'missing'}`);
+}
+
 cloudinary.config({
-    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-    signature_algorithm: 'sha1'
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret,
+    secure: true
 });
+
+// Verify configuration
+console.log('Cloudinary Config Status:', {
+    isConfigured: !!cloudinary.config().cloud_name,
+    config: {
+        cloud_name: cloudinary.config().cloud_name,
+        api_key: cloudinary.config().api_key ? 'exists' : 'missing',
+        api_secret: cloudinary.config().api_secret ? 'exists' : 'missing'
+    }
+});
+
+export const uploadProfilePic = async (fileBuffer, docId) => {
+    try {
+        // Verify Cloudinary configuration
+        if (!cloudinary.config().cloud_name) {
+            throw new Error("Cloudinary not properly configured");
+        }
+
+        const processedImage = await sharp(fileBuffer)
+            .resize(300, 300)
+            .webp({ quality: 80 })
+            .toBuffer();
+
+        const fileStr = `data:image/webp;base64,${processedImage.toString("base64")}`;
+
+        const timestamp = Math.floor(Date.now() / 1000);
+        const params = {
+            timestamp: timestamp.toString(),
+            folder: `doctor_profiles/${docId}`,
+            format: "webp",
+        };
+        const signature = generateSignature(params);
+
+        const response = await cloudinary.uploader.upload(fileStr, {
+            folder: `doctor_profiles/${docId}`,
+            format: "webp",
+            api_key: process.env.CLOUDINARY_API_KEY,
+            timestamp,
+            signature,
+            resource_type: "image"
+        });
+
+        return response.secure_url;
+    } catch (error) {
+        console.error("Error uploading profile picture to Cloudinary:", error);
+        throw new Error(`Failed to upload profile picture: ${error.message}`);
+    }
+};
 
 // Upload function for doctor certifications
 export const uploadDoctorCertifications = async (files, docId) => {

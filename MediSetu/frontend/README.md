@@ -1,12 +1,32 @@
-# React + Vite
+## To start the project:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To install the project in your machine please follow these are steps:
 
-Currently, two official plugins are available:
+First, run the development server:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Frist, Clone the project
+git clone https://github.com/rahat2020/Medicare.git
+# Second, install the packages
+npm install
+#or
+yarn install
+# Third, to run the development server
+npm run dev
+# or
+yarn dev
+```
 
-## Expanding the ESLint configuration
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Descriptions
+
+To learn more about the Medicare, take a look at the following resources:
+
+- [Documentation](https://docs.google.com/document/d/1TpuNG_qOhtjpG9_ikeCoJXuXfwD3O3jVZjzM_m29mI0/edit) - learn more about this project.
+- [Project Requrieemnt](https://docs.google.com/document/d/1EkVCGkZEgFTMxQ55yoUJ-c5VGBALlDFFuPrbtzaijNg/edit) - know more about the project requirements.
+- [Github working policy](https://docs.google.com/document/d/1xzQKDDQD91LphiGHFylG1QZ6AlHzibFdkbVqqVERk-4/edit) - know more about how to branches, push, pull or merge the code.
