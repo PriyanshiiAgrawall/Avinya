@@ -21,7 +21,7 @@ const appointmentSchema = new mongoose.Schema({
     },
     mode: {
         type: String,
-        enum: ['online', 'inperson'],
+        enum: ['virtual', 'physical'],
         required: true
     },
     status: {

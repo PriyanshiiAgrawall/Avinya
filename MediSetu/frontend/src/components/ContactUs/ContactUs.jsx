@@ -41,7 +41,7 @@ const ContactUs = () => {
             </div>
             <h3 className="text-lg font-semibold mt-4">Office Address</h3>
             <p className="text-sm text-gray-600 mt-2">
-              medicare@gmail.com <br /> medicare-support@gmail.com
+              medisetue@gmail.com <br /> medisetu-support@gmail.com
             </p>
           </div>
           <div className="bg-white shadow-md rounded-lg p-6 flex justify-center items-center flex-col text-center">

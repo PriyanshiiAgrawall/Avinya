@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import React from "react";
-import { Facebook, Instagram, Linkedin, Twitter } from "react-feather";
+// import { Facebook, Instagram, Linkedin, Twitter } from "react-feather";
 
 const DoctorsCard = ({ doctor }) => {
   const doctorContactIcons = (
     <>
-      <Link href="#">
+      {/* <Link href="#">
         <Facebook
           className="text-blue-500 hover:text-white hover:bg-blue-500 absolute z-20 duration-300 -left-10 group-hover:left-3 bottom-40 bg-gray-100 shadow-lg p-2 rounded-full "
           size={34}
@@ -29,7 +29,7 @@ const DoctorsCard = ({ doctor }) => {
           className="text-blue-500 hover:text-white hover:bg-blue-500 absolute z-20 duration-300 -left-10 group-hover:left-3 bottom-10 bg-gray-100 shadow-lg p-2 rounded-full "
           size={34}
         />
-      </Link>
+      </Link> */}
     </>
   );
 
@@ -37,13 +37,13 @@ const DoctorsCard = ({ doctor }) => {
     <div className="bg-white rounded-lg p-4 doc_card_style">
       <div className="relative doc_card_img rounded-md group bg-gray-200 overflow-hidden mb-4 overflow-x-hidden">
         <Image
-          src={doctor.image}
-          alt={doctor.name}
+          src={doctor.profilePic}
+          alt={doctor.fullName}
           className="object-cover w-full h-full group"
           width={500}
           height={500}
         />
-        {doctorContactIcons}
+
       </div>
       <div className="text-center">
         <h3 className="font-semibold text-lg">{doctor.name}</h3>
@@ -59,7 +59,7 @@ const DoctorsCard = ({ doctor }) => {
           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 17.27L18.18 21l-1.63-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.45 4.73L5.82 21z" />
           </svg>
-          <span className="ml-1 text-gray-500 text-sm">(0)</span>
+          <span className="ml-1 text-gray-500 text-sm">{doctor.fullName}</span>
         </div>
       </div>
     </div>

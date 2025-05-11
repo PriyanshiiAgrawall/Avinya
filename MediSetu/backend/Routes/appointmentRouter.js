@@ -2,12 +2,14 @@ import express from "express";
 
 import { upload } from "../middlewares/uploadMiddleware.js";
 import { transaction } from "../Controllers/PaymentController.js";
+import { bookAppointment } from "../Controllers/AppointmentController.js";
 
 // import { userRegistration, userLogin, fetchAllRegisteredEmails, viewUser, editUser, deleteUser, updatePassword } from "../controllers/User.js";
 // import { validateToken } from "../middlewares/apiAuthentication.js"
 const router = express.Router();
 
 router.post("/transaction", transaction);
+router.post("/bookAppointment", bookAppointment);
 // router.get("/getTopDoctors", getTopDoctors);
 // router.get("/getDoctor", getDoctor)
 // router.post(

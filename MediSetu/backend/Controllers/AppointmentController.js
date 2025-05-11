@@ -1,4 +1,3 @@
-
 import Appointment from '../Models/Appointment.js';
 import Doctor from '../Models/Doctor.js';
 import Patient from '../Models/Patient.js'
@@ -6,29 +5,34 @@ import Patient from '../Models/Patient.js'
 
 export const bookAppointment = async (req, res) => {
     try {
+        const d = req.body;
+        console.log("Request body:", d);
         const {
-            patientId,
-            doctorId,
+            patient,
+            doctor,
             appointmentDate,
             appointmentTime,
-            mode
+            mode,
+            status,
+            prescriptionUrl,
+            transcriptionUrl,
+            sessionId
         } = req.body;
-
+        console.log(req.body.patient)
         // Validate required fields
-        if (!patientId || !doctorId || !appointmentDate || !appointmentTime || !mode) {
+        if (!patient || !doctor || !appointmentDate || !appointmentTime || !mode) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
-
-        const doctorExists = await Doctor.findById(doctorId);
-        const patientExists = await patient.findById(patientId);
+        const doctorExists = await Doctor.findById(doctor);
+        const patientExists = await Patient.findById(patient);
 
         if (!doctorExists || !patientExists) {
             return res.status(404).json({ message: 'Doctor or patient not found' });
         }
 
         const existingAppointment = await Appointment.findOne({
-            doctor: doctorId,
+            doctor: doctor,
             appointmentDate,
             appointmentTime
         });
@@ -37,21 +41,26 @@ export const bookAppointment = async (req, res) => {
             return res.status(409).json({ message: 'Slot already booked' });
         }
 
-        // Create appointment
-        const newAppointment = new Appointment({
-            patient: patientId,
-            doctor: doctorId,
-            appointmentDate,
-            appointmentTime,
-            mode,
-            status: 'active', // initialize if needed
-        });
+        // Create and save appointment
+        const newAppointment = new Appointment(d);
+        const savedAppointment = await newAppointment.save();
 
-        await newAppointment.save();
+        // Update doctor's appointments array
+        await Doctor.findByIdAndUpdate(
+            doctor,
+            { $push: { appointments: savedAppointment._id } }
+        );
 
+        // Update patient's appointments array
+        await Patient.findByIdAndUpdate(
+            patient,
+            { $push: { appointments: savedAppointment._id } }
+        );
+
+        // Send success response with the saved appointment
         res.status(201).json({
             message: 'Appointment booked successfully',
-            appointment: newAppointment
+            appointment: savedAppointment
         });
 
     } catch (error) {

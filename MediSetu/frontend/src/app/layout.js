@@ -9,7 +9,7 @@ import { Suspense } from 'react';
 import Topbar from '@/components/Home/Topbar';
 import GoToTop from '@/UI/GotoTop';
 import { StoreProvider } from '@/redux/StoreProvider';
-
+import { Toaster } from "react-hot-toast";
 const Footer = dynamic(() => import('@/components/Home/Footer'), { ssr: false });
 
 const montserrat = Montserrat({
@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
           <StoreProvider>
             {!hideLayout && <Topbar />}
             {children}
+            <Toaster position="top-right" reverseOrder={false} />
             {!hideLayout && (
               <>
                 <GoToTop />

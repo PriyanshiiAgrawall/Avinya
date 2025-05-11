@@ -282,4 +282,32 @@ export const DoctorLogin = async (req, res) => {
 
 }
 
+export const getUnverifiedDoctors = async (req, res) => {
+    try {
+        console.log("Fetching unverified doctors");
+        const unverifiedDoctors = await Doctor.find({ isVerified: false });
+        res.status(200).json({ doctors: unverifiedDoctors });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch doctors", error });
+    }
+};
 
+export const verifyDoctor = async (req, res) => {
+    const { doctorId, action } = req.body;
+
+    if (!doctorId || !["approve", "reject"].includes(action)) {
+        return res.status(400).json({ message: "Invalid request" });
+    }
+
+    try {
+        if (action === "approve") {
+            await Doctor.findByIdAndUpdate(doctorId, { isVerified: true });
+            return res.status(200).json({ message: "Doctor approved" });
+        } else {
+            // Action is "reject", do nothing to DB
+            return res.status(200).json({ message: "Doctor rejected" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Verification failed", error });
+    }
+};

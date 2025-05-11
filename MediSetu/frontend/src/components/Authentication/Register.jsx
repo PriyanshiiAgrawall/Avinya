@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 const specializations = ["Cardiology", "Dermatology", "Neurology", "Pediatrics", "Psychiatry"];
 const cities = ["Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata"];
 const times = Array.from({ length: 16 }, (_, i) => `${6 + i}:00`);
@@ -11,6 +14,13 @@ const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 
 
 const Register = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/");
+    }
+  }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [userType, setUserType] = useState("patient"); // 'patient' or 'doctor'
   const [formData, setFormData] = useState({
@@ -83,27 +93,27 @@ const Register = () => {
 
     if (userType === "doctor") {
       if (!formData.profilePic) {
-        alert("Please upload a profile picture.");
+        toast.error("Please upload a profile picture.");
         setIsLoading(false);
         return;
       }
 
       const validCertificates = formData.certificates.filter((cert) => cert !== null);
       if (validCertificates.length === 0) {
-        alert("Please upload at least one certificate.");
+        toast.error("Please upload a profile picture.");
         setIsLoading(false);
         return;
       }
 
       const hasSlot = Object.values(formData.availableSlots).some((slots) => slots.length > 0);
       if (!hasSlot) {
-        alert("Please select at least one available slot.");
+        toast.error("Please select at least one available slot.");
         setIsLoading(false);
         return;
       }
 
       if (!formData.specialization || formData.specialization === "Select") {
-        alert("Please choose a specialization.");
+        toast.error("Please choose a specialization.");
         setIsLoading(false);
         return;
       }
@@ -131,30 +141,36 @@ const Register = () => {
     }
 
     try {
+      let response;
       if (userType === "doctor") {
-        const response = await axios.post(
+        response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/registerDoc`,
           form,
           {
             headers: { "Content-Type": "multipart/form-data" },
           }
         );
-        alert("Registration successful!");
       }
       else if (userType === "patient") {
         console.log(form);
-        const response = await axios.post(
+        response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/patient/registerPatient`,
           form,
         );
-        alert("Registration successful!");
       }
-      localStorage.setItem("token", response.data.accessToken);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Registration successful! Please login.");
+        router.push("/login");
+      }
+
+
+
 
     } catch (error) {
       console.error("Registration failed:", error.response?.data || error.message);
-      alert("Registration failed");
+      toast.error("Registration failed");
+
     } finally {
       setIsLoading(false);
     }
@@ -189,6 +205,7 @@ const Register = () => {
               Full Name
             </label>
             <input
+              disabled={isLoading}
               id="fullName"
               name="fullName"
               type="text"
@@ -206,6 +223,7 @@ const Register = () => {
               Email Address
             </label>
             <input
+              disabled={isLoading}
               id="email"
               name="email"
               type="email"
@@ -223,6 +241,7 @@ const Register = () => {
               Create Password
             </label>
             <input
+              disabled={isLoading}
               id="password"
               name="password"
               type="password"
@@ -244,6 +263,7 @@ const Register = () => {
                   Phone Number
                 </label>
                 <input
+                  disabled={isLoading}
                   id="phoneNumber"
                   name="phoneNumber"
                   type="tel"
@@ -268,6 +288,7 @@ const Register = () => {
                   Years of Experience
                 </label>
                 <input
+                  disabled={isLoading}
                   id="yearsOfExperience"
                   name="yearsOfExperience"
                   type="number"
@@ -285,6 +306,7 @@ const Register = () => {
                   Address
                 </label>
                 <input
+                  disabled={isLoading}
                   id="address"
                   name="address"
                   type="text"
@@ -302,6 +324,7 @@ const Register = () => {
                   Current Workplace
                 </label>
                 <input
+                  disabled={isLoading}
                   id="currentWorking"
                   name="currentWorking"
                   type="text"
@@ -327,6 +350,7 @@ const Register = () => {
                   Consultation Fee (₹)
                 </label>
                 <input
+                  disabled={isLoading}
                   id="consultationFee"
                   name="consultationFee"
                   type="number"
@@ -369,6 +393,7 @@ const Register = () => {
                 {formData.certificates.map((file, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <input
+                      disabled={isLoading}
                       type="file"
                       accept=".pdf,.jpg,.jpeg,.png"
                       onChange={(e) => {
@@ -459,6 +484,7 @@ const Register = () => {
 
           <div className="flex items-center">
             <input
+              disabled={isLoading}
               id="agree-terms"
               name="agree-terms"
               type="checkbox"
@@ -513,7 +539,7 @@ const Register = () => {
           </button>
 
           <p className="text-center text-sm text-gray-600">
-            Already have an account? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
+            Already have an account? <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
           </p>
 
           <p className="text-xs text-center text-gray-500">

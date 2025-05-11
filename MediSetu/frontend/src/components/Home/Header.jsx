@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { ArrowRight, CheckSquare, ChevronDown, Search } from "react-feather";
-
+import { ArrowRight, CheckSquare } from "react-feather";
+import { useRouter } from "next/navigation";
 const Header = () => {
+  const router = useRouter();
   return (
     <div className="md:h-screen px-4 md:px-6 flex flex-col md:flex-row items-center justify-between rounded-lg relative overflow-hidden ">
       {/* Left Section */}
@@ -14,35 +15,12 @@ const Header = () => {
           <p className="text-gray-500 text-lg">
             Because No Patient Should Feel Out of Reach.
           </p>
-          <button className="flex items-center bg-blue-500 hover:bg-white hover:text-blue-500 text-white border hover:border-blue-500 rounded-lg font-semibold shadow-md transition duration-300 w-fit px-7 py-3 text-lg">
+          <button onClick={() => router.push("/all-doctors")} className="flex items-center bg-blue-500 hover:bg-white hover:text-blue-500 text-white border hover:border-blue-500 rounded-lg font-semibold shadow-md transition duration-300 w-fit px-7 py-3 text-lg">
             <span>Consult Doctors</span>
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Search Section */}
-        {/* <div className="bg-white rounded-full shadow-md p-2 flex items-center space-x-2 border border-gray-200 w-full mt-14">
-          <select className="outline-none border-none bg-transparent text-gray-500 px-4 py-3 w-1/3 appearance-none">
-            <option>Select a location</option>
-            <option>Bangladesh</option>
-            <option>Pakistan</option>
-            <option>Palestine</option>
-            <option>Afghanistan</option>
-          </select>
-          <span className="text-gray-400">
-            <ChevronDown />
-          </span>
-          <span className="border-l-2 py-4"></span>
-          <input
-            type="text"
-            placeholder="Search doctors, clinics, etc."
-            className="outline-none px-4 py-3 w-full text-gray-600"
-          />
-          <button className="bg-blue-500 text-white px-6 py-3 rounded-full flex items-center space-x-1">
-            <Search />
-            <span>Search</span>
-          </button>
-        </div> */}
       </div>
 
       {/* Right Section */}

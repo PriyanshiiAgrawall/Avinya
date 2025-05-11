@@ -11,18 +11,17 @@ const userRegistrationInput = z.object({
 });
 
 
-
-
-
 export const patientRegistration = async (req, res) => {
     try {
         console.log("hello");
         const validatedData = req.body;
         console.log(validatedData)
+
         //If the input (req.body) does not match the userRegistrationInput, Zod will automatically throw an error we do not manually return respose
         // Check if the email already exists in the database
 
-        const existingUser = await Patient.findOne({ emailId: validatedData.emailId });
+        const existingUser = await Patient.findOne({ email: validatedData.email });
+        console.log(existingUser)
         if (existingUser) {
             return res.status(403).json({
                 success: false,
@@ -130,6 +129,41 @@ export const PatientLogin = async (req, res) => {
     }
 
 }
+
+export const getPatient = async (req, res) => {
+    try {
+        const { patientId } = req.query;
+
+        if (!patientId) {
+            return res.status(400).json({ message: 'Patient ID is required' });
+        }
+
+        const patient = await Patient.findById(patientId)
+            .populate({
+                path: 'appointments',
+                populate: {
+                    path: 'doctor',
+                    select: 'fullName specialization profilePic email phoneNumber'
+                }
+            });
+
+        if (!patient) {
+            return res.status(404).json({ message: 'Patient not found' });
+        }
+
+        // Convert the patient object to a plain JavaScript object
+        const patientObj = patient.toObject();
+
+        // Log the populated data for debugging
+        console.log('Populated patient data:', JSON.stringify(patientObj, null, 2));
+
+        res.status(200).json({ patient: patientObj });
+    } catch (error) {
+        console.error('Error fetching patient:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 
 
 

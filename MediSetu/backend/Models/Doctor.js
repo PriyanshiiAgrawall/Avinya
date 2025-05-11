@@ -74,7 +74,11 @@ const doctorSchema = new mongoose.Schema({
     qualification: {
         type: String,
         required: true,
-    }
+    },
+    appointments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Appointment'
+    }]
 }, {
     timestamps: true
 });

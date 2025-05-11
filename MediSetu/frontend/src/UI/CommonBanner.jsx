@@ -19,7 +19,7 @@ const CommonBanner = ({
           <p className="text-sm text-center">{descriptions || ""}</p>
           <span className="bg-white text-black flex justify-center w-fit mx-auto gap-2 py-2 px-3 rounded-md text-[16px]">
             <Link href="/" className="cursor-default">
-              <h3 className="text-gray-800 font-medium hover:text-blue-500">Medicare</h3>
+              <h3 className="text-gray-800 font-medium hover:text-blue-500">Medisetu</h3>
             </Link>
             <ChevronRight />
             <h3 className="text-blue-500">{routeName || ""}</h3>

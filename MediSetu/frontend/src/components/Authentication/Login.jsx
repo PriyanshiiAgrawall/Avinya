@@ -1,8 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/");
+    }
+  }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [role, setRole] = useState("patient"); // default role
   const [email, setEmail] = useState("");
@@ -34,16 +43,18 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // Handle login success
-        console.log("Login successful", data);
+        toast.success("Login successful!");
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        router.push("/");
+
       } else {
         // Handle login failure
-        alert(data.message || "Login failed");
+        toast.error(data.message || "Login failed");
       }
       console.log(data);
-      localStorage.setItem("token", data.accessToken);
-      localStorage.setItem("user", JSON.stringify(data.user));
     } catch (error) {
+      toast.error("Something went wrong");
       console.error("Error logging in:", error);
     } finally {
       setIsLoading(false);
@@ -82,6 +93,7 @@ const Login = () => {
               Email
             </label>
             <input
+              disabled={isLoading}
               id="signin-email"
               name="email"
               type="email"
@@ -99,6 +111,7 @@ const Login = () => {
               Password
             </label>
             <input
+              disabled={isLoading}
               id="signin-password"
               name="password"
               type="password"
@@ -114,6 +127,7 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
+                disabled={isLoading}
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
@@ -158,7 +172,7 @@ const Login = () => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Logning in...
+                Logging in...
               </>
             ) : (
               `Login as ${role === "patient" ? "Patient" : "Doctor"}`

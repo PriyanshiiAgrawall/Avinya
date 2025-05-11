@@ -1,17 +1,35 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, User, Lock, AlignRight } from "react-feather";
 import { navData } from "@/data/navData";
 import AppButton from "@/UI/AppButton";
 import Image from "next/image";
 import SignInAndSignUp from "../Authentication";
-
+import { useRouter } from "next/navigation";
 const Topbar = () => {
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
   const [speDropdownOpen, setSpeDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    if (token && storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    setUser(null);
+    router.push("/");
+  }
   const links = (
     <>
       {navData.map((item, index) => (
@@ -90,7 +108,7 @@ const Topbar = () => {
 
   return (
     <nav className="bg-white">
-      <div className="px-4 lg:px-24 flex items-center justify-between text-sm md:text-[15px] py-[0.1px] bg-[#3B82F6]">
+      <div className="px-4 lg:px-24 flex items-center justify-between text-sm md:text-[15px] py-[0.1px] bg-[#EFF6FF]">
         <div className="flex gap-4 items-center">
           {/* Mobile Menu Button */}
           <button
@@ -122,23 +140,41 @@ const Topbar = () => {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center space-x-2 md:space-x-4">
-          <AppButton
-            withoutHrefBtn
-            text="Register"
-            icon={User}
-            callback={() => setIsModalOpen(true)}
-            customStyles={"hover:bg-blue-500 hover:text-white px-2"}
-          />
-          <AppButton
-            withoutHrefBtn
-            text="Login"
-            icon={Lock}
-            callback={() => setIsModalOpen(true)}
-            customStyles={
-              "bg-blue-500 text-white hover:bg-white hover:text-blue-500 border-blue-500 px-2"
-            }
-          />
+          {user ? (
+            <>
+              <Link
+                href={user.role === "patient" ? `/patient?id=${user.id}` : `/doctor?id=${user.id}`}
+                className="hover:text-blue-600 font-medium px-3 py-1"
+              >
+                Profile
+              </Link>
+              <AppButton
+                withoutHrefBtn
+                text="Logout"
+                callback={handleLogout}
+                customStyles="bg-red-500 text-white hover:bg-white hover:text-red-500 border-red-500 px-2"
+              />
+            </>
+          ) : (
+            <>
+              <AppButton
+                withoutHrefBtn
+                text="Register"
+                icon={User}
+                callback={() => setIsModalOpen(true)}
+                customStyles="hover:bg-blue-500 hover:text-white px-2"
+              />
+              <AppButton
+                withoutHrefBtn
+                text="Login"
+                icon={Lock}
+                callback={() => setIsModalOpen(true)}
+                customStyles="bg-blue-500 text-white hover:bg-white hover:text-blue-500 border-blue-500 px-2"
+              />
+            </>
+          )}
         </div>
+
       </div>
 
       {/* Mobile Menu */}
@@ -148,19 +184,39 @@ const Topbar = () => {
 
           {/* Mobile Buttons */}
           <div className="flex flex-col space-y-2">
-            <Link
-              href="/signUp"
-              className="hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
-            >
-              <User /> Register
-            </Link>
-            <Link
-              href="/login"
-              className="bg-blue-500 text-white hover:bg-white hover:text-blue-600 px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
-            >
-              <Lock className="font-extra-bold text-16" /> Login
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  href={user.role === "patient" ? `/patient?id=${user.id}` : `/doctor?id=${user.id}`}
+                  className="hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white hover:bg-white hover:text-red-500 px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/register"
+                  className="hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
+                >
+                  <User /> Register
+                </Link>
+                <Link
+                  href="/login"
+                  className="bg-blue-500 text-white hover:bg-white hover:text-blue-600 px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
+                >
+                  <Lock /> Login
+                </Link>
+              </>
+            )}
           </div>
+
         </div>
       )}
       {isModalOpen && <SignInAndSignUp setIsModalOpen={setIsModalOpen} />}

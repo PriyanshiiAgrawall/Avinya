@@ -1,5 +1,5 @@
 import express from "express";
-import { createDoctor, DoctorLogin, filterDoctors, getDoctor, getTopDoctors } from "../Controllers/DoctorController.js";
+import { createDoctor, DoctorLogin, filterDoctors, getDoctor, getTopDoctors, getUnverifiedDoctors, verifyDoctor } from "../Controllers/DoctorController.js";
 import { upload } from "../middlewares/uploadMiddleware.js";
 
 // import { userRegistration, userLogin, fetchAllRegisteredEmails, viewUser, editUser, deleteUser, updatePassword } from "../controllers/User.js";
@@ -18,6 +18,9 @@ router.post(
     createDoctor
 );
 router.post("/loginDoctor", DoctorLogin)
+
+router.get("/unverified-doctors", getUnverifiedDoctors);
+router.post("/verify", verifyDoctor);
 // router.post("/login", userLogin);
 // router.get("/fetchAllRegisteredEmails", fetchAllRegisteredEmails);
 // router.get("/viewUser", validateToken, viewUser);

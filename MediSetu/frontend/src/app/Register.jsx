@@ -39,7 +39,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    
+
     // Prepare data based on user type
     const submitData = userType === 'patient' ? {
       name: formData.fullName,
@@ -71,7 +71,7 @@ const Register = () => {
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-center mb-6">Join Our Healthcare Network</h2>
-      
+
       <div className="flex justify-center mb-6">
         <button
           type="button"
@@ -359,7 +359,7 @@ const Register = () => {
         </button>
 
         <p className="text-center text-sm text-gray-600">
-          Already have an account? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
+          Already have an account? <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
         </p>
 
         <p className="text-xs text-center text-gray-500">
