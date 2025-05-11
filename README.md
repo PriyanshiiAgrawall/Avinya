@@ -1,45 +1,63 @@
-# MediSetu - Healthcare Platform
+# 🏥 MediSetu - Telehealth Platform for India
 
-MediSetu is a comprehensive healthcare platform that connects patients with doctors through virtual consultations, appointment scheduling, and digital prescriptions.
+**MediSetu** is a full-featured telemedicine platform built to connect patients with certified doctors across India. From real-time virtual consultations to intelligent appointment booking, digital prescriptions, and admin-led doctor verification, MediSetu streamlines the entire healthcare experience online.
 
-## 🌟 Live Demo
+---
 
-- **Live Application**: [MediSetu](https://medisetuapp.onrender.com/)
-- **Project Presentation**: [PPT Link]
-- **Project Demo**: [Demo Video]
+## 🌐 Live Demo
 
-## 🚀 Features
+- **🌐 Application**: [MediSetu on Render](https://medisetuapp.onrender.com/)
+- **🖥️ Project Presentation**: [PPT Link](https://drive.google.com/drive/u/3/folders/1wSKzjTc2U-w-hPHBsub9xZOj5yg9RQn1)
+- **📊 Workflow Diagram**:  
+  ![Workflow Diagram](https://res.cloudinary.com/dop7kjln7/image/upload/v1747006073/ffk3em1bq0qiha0khsee.png)
+- **📽️ Project Demo**: *[Coming Soon]*
 
-- **Virtual Consultations**: Real-time video consultations between doctors and patients
-- **Appointment Scheduling**: Easy booking system for both online and in-person appointments
-- **Digital Prescriptions**: AI-powered consultation summaries and digital prescriptions
-- **Secure Payments**: Integrated payment system using Paddle
-- **Real-time Chat**: Live transcription during consultations
-- **User Authentication**: Secure login and registration system
-- **Profile Management**: Separate dashboards for doctors and patients
+---
+
+## ✨ Key Features
+
+- 🧑‍⚕️ Real-Time Video Consultations (WebRTC + live transcription)
+- 🗓️ Intelligent Appointment System (filter doctors by city, rating, fees, experience)
+- 🧠 AI-Powered Digital Prescriptions (Groq-generated summaries)
+- 💳 Secure Payment Processing (Paddle)
+- 💬 In-App Chat + Transcription Panel
+- 🛂 Doctor Verification by Admin (including certificate review)
+- 🧍‍♂️ Separate Portals for Doctors, Patients, and Admin
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 14
-- **UI Library**: React.js
-- **Styling**: Tailwind CSS
-- **Form Validation**: Zod
-- **State Management**: Redux Toolkit
-- **Real-time Communication**: Socket.io
-- **AI Integration**: Groq
-- **Video Calls**: WebRTC
+
+| Tool | Purpose |
+|------|---------|
+| **Next.js 14** | Framework |
+| **Tailwind CSS** | Styling |
+| **React** | UI Components |
+| **Redux Toolkit** | State Management |
+| **Socket.io** | Real-time Communication |
+| **Groq AI** | Transcription & Summary |
+| **WebRTC** | Video Calling |
+| **Zod** | Form Validation |
 
 ### Backend
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Authentication**: JWT, bcrypt
-- **API Security**: CORS
-- **Database**: MongoDB
-- **Payment Processing**: Paddle
-- **File Storage**: Cloudinary
-- **File Upload**: Multer, Sharp
-- **HTTP Client**: Axios
+
+| Tool | Purpose |
+|------|---------|
+| **Node.js + Express.js** | API server |
+| **MongoDB** | Database |
+| **JWT + Bcrypt** | Authentication |
+| **Multer + Sharp + Cloudinary** | File uploads |
+| **Paddle** | Payment integration |
+| **CORS** | API security |
+| **Axios** | HTTP Requests |
+
+---
+
+## 📁 Project Structure
+
+
 
 ## 🏗️ Project Structure
 
@@ -70,8 +88,8 @@ MediSetu/
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/medisetu.git
-cd medisetu
+git https://github.com/PriyanshiiAgrawall/Avinya
+
 ```
 
 2. Install dependencies
