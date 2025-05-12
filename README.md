@@ -6,11 +6,11 @@
 
 ## 🌐 Live Demo
 
-- **🌐 Application**: [MediSetu on Render](https://medisetuapp.onrender.com/)
+- **🌐 Application**: [MediSetu on Vercel](https://medi-setu.vercel.app/)
 - **🖥️ Project Presentation**: [PPT Link](https://drive.google.com/drive/u/3/folders/1wSKzjTc2U-w-hPHBsub9xZOj5yg9RQn1)
 - **📊 Workflow Diagram**:  
   ![Workflow Diagram](https://res.cloudinary.com/dop7kjln7/image/upload/v1747006073/ffk3em1bq0qiha0khsee.png)
-- **📽️ Project Demo**: *[Coming Soon]*
+- **📽️ Project Demo**: _[Coming Soon]_
 
 ---
 
@@ -26,38 +26,39 @@
 
 ---
 
+- **Frontend Deployment (Vercel)**: [Deploy Frontend on Vercel](https://medi-setu.vercel.app/)
+- **Backend Deployment (Render)**: [Deploy Backend on Render](https://medisetu.onrender.com)
+
 ## 🛠️ Tech Stack
 
 ### Frontend
 
-| Tool | Purpose |
-|------|---------|
-| **Next.js 14** | Framework |
-| **Tailwind CSS** | Styling |
-| **React** | UI Components |
-| **Redux Toolkit** | State Management |
-| **Socket.io** | Real-time Communication |
-| **Groq AI** | Transcription & Summary |
-| **WebRTC** | Video Calling |
-| **Zod** | Form Validation |
+| Tool              | Purpose                 |
+| ----------------- | ----------------------- |
+| **Next.js 14**    | Framework               |
+| **Tailwind CSS**  | Styling                 |
+| **React**         | UI Components           |
+| **Redux Toolkit** | State Management        |
+| **Socket.io**     | Real-time Communication |
+| **Groq AI**       | Transcription & Summary |
+| **WebRTC**        | Video Calling           |
+| **Zod**           | Form Validation         |
 
 ### Backend
 
-| Tool | Purpose |
-|------|---------|
-| **Node.js + Express.js** | API server |
-| **MongoDB** | Database |
-| **JWT + Bcrypt** | Authentication |
-| **Multer + Sharp + Cloudinary** | File uploads |
-| **Paddle** | Payment integration |
-| **CORS** | API security |
-| **Axios** | HTTP Requests |
+| Tool                            | Purpose             |
+| ------------------------------- | ------------------- |
+| **Node.js + Express.js**        | API server          |
+| **MongoDB**                     | Database            |
+| **JWT + Bcrypt**                | Authentication      |
+| **Multer + Sharp + Cloudinary** | File uploads        |
+| **Paddle**                      | Payment integration |
+| **CORS**                        | API security        |
+| **Axios**                       | HTTP Requests       |
 
 ---
 
 ## 📁 Project Structure
-
-
 
 ## 🏗️ Project Structure
 
@@ -80,6 +81,7 @@ MediSetu/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
@@ -87,12 +89,14 @@ MediSetu/
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git https://github.com/PriyanshiiAgrawall/Avinya
 
 ```
 
 2. Install dependencies
+
 ```bash
 # Install frontend dependencies
 npm install
@@ -103,13 +107,15 @@ npm install
 ```
 
 3. Set up environment variables
-Create `.env.local` in the root directory:
+   Create `.env.local` in the root directory:
+
 ```
 NEXT_PUBLIC_API_BASE_URL=your_backend_url
 NEXT_PUBLIC_GROQ_API_KEY=your_groq_api_key
 ```
 
 4. Start the development server
+
 ```bash
 # Start frontend
 npm run dev
@@ -122,10 +128,12 @@ npm run dev
 ## 🔒 Environment Variables
 
 ### Frontend
+
 - `NEXT_PUBLIC_API_BASE_URL`: Backend API URL
 - `NEXT_PUBLIC_GROQ_API_KEY`: Groq API key for AI features
 
 ### Backend
+
 - `MONGODB_URI`: MongoDB connection string
 - `JWT_SECRET`: JWT secret key
 - `CLOUDINARY_CLOUD_NAME`: Cloudinary cloud name
@@ -136,24 +144,28 @@ npm run dev
 ## 📱 Features in Detail
 
 ### Virtual Consultations
+
 - Real-time video calls using WebRTC
 - Live chat and transcription
 - Screen sharing capabilities
 - Recording option (with consent)
 
 ### Appointment System
+
 - Calendar-based scheduling
 - Multiple consultation modes (online/in-person)
 - Automated reminders
 - Cancellation and rescheduling
 
 ### Digital Prescriptions
+
 - AI-powered consultation summaries
 - Digital prescription generation
 - Downloadable PDF format
 - Secure storage and sharing
 
 ### Payment Integration
+
 - Secure payment processing
 - Multiple payment methods
 - Automated receipts
