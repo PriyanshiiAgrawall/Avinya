@@ -9,7 +9,9 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchUnverifiedDoctors = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/unverified-doctors`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/unverified-doctors`
+        );
         setDoctors(res.data.doctors || []);
       } catch (error) {
         console.error("Failed to fetch doctors:", error);
@@ -23,7 +25,7 @@ const AdminPage = () => {
     try {
       await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/verify`, {
         doctorId: id,
-        action,
+        action
       });
 
       if (action === "approve" || action === "reject") {
@@ -43,10 +45,7 @@ const AdminPage = () => {
         <p>No unverified doctors.</p>
       ) : (
         doctors.map((doc) => (
-          <div
-            key={doc._id}
-            className="border p-6 mb-6 rounded shadow-md bg-white space-y-4"
-          >
+          <div key={doc._id} className="border p-6 mb-6 rounded shadow-md bg-white space-y-4">
             <div className="flex items-center space-x-4">
               <img
                 src={doc.profilePic}
@@ -84,7 +83,6 @@ const AdminPage = () => {
                     ))}
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -100,11 +98,7 @@ const AdminPage = () => {
                       key={idx}
                       className="block border rounded overflow-hidden hover:shadow-lg transition"
                     >
-                      <img
-                        src={url}
-                        alt={`Certificate ${idx + 1}`}
-                        className="h-40 object-cover"
-                      />
+                      <img src={url} alt={`Certificate ${idx + 1}`} className="h-40 object-cover" />
                     </a>
                   ))
                 ) : (

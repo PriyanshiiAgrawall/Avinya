@@ -30,7 +30,7 @@ const Register = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
@@ -41,25 +41,28 @@ const Register = () => {
     setIsLoading(true);
 
     // Prepare data based on user type
-    const submitData = userType === 'patient' ? {
-      name: formData.fullName,
-      email: formData.email,
-      password: formData.password
-    } : {
-      fullName: formData.fullName,
-      email: formData.email,
-      password: formData.password,
-      phoneNumber: formData.phoneNumber,
-      specialization: formData.specialization,
-      yearsOfExperience: formData.yearsOfExperience,
-      address: formData.address,
-      currentWorking: formData.currentWorking,
-      city: formData.city,
-      consultationFee: formData.consultationFee,
-      about: formData.about,
-      certificates: formData.certificates,
-      availableSlots: formData.availableSlots
-    };
+    const submitData =
+      userType === "patient"
+        ? {
+            name: formData.fullName,
+            email: formData.email,
+            password: formData.password
+          }
+        : {
+            fullName: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+            phoneNumber: formData.phoneNumber,
+            specialization: formData.specialization,
+            yearsOfExperience: formData.yearsOfExperience,
+            address: formData.address,
+            currentWorking: formData.currentWorking,
+            city: formData.city,
+            consultationFee: formData.consultationFee,
+            about: formData.about,
+            certificates: formData.certificates,
+            availableSlots: formData.availableSlots
+          };
 
     // Simulate API call
     console.log("Submitting:", submitData);
@@ -139,7 +142,9 @@ const Register = () => {
                       focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             placeholder="••••••••"
           />
-          <p className="text-xs text-gray-500">Use at least 8 characters with a mix of letters and numbers</p>
+          <p className="text-xs text-gray-500">
+            Use at least 8 characters with a mix of letters and numbers
+          </p>
         </div>
 
         {/* Doctor-specific fields */}
@@ -180,7 +185,10 @@ const Register = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="yearsOfExperience" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="yearsOfExperience"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Years of Experience
               </label>
               <input
@@ -290,15 +298,19 @@ const Register = () => {
                 name="certificates"
                 type="text"
                 value={formData.certificates[0] || ""}
-                onChange={(e) => setFormData(prev => ({
-                  ...prev,
-                  certificates: [e.target.value]
-                }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    certificates: [e.target.value]
+                  }))
+                }
                 className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
                           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                 placeholder="https://example.com/certificate.pdf"
               />
-              <p className="text-xs text-gray-500">You can add more certificates later in your profile</p>
+              <p className="text-xs text-gray-500">
+                You can add more certificates later in your profile
+              </p>
             </div>
           </>
         )}
@@ -354,12 +366,15 @@ const Register = () => {
               Registering...
             </>
           ) : (
-            `Register as ${userType === 'patient' ? 'Patient' : 'Doctor'}`
+            `Register as ${userType === "patient" ? "Patient" : "Doctor"}`
           )}
         </button>
 
         <p className="text-center text-sm text-gray-600">
-          Already have an account? <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
+          Already have an account?{" "}
+          <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">
+            Sign in here
+          </a>
         </p>
 
         <p className="text-xs text-center text-gray-500">

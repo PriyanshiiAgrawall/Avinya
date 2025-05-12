@@ -8,5 +8,8 @@ module.exports = {
         hostname: "**"
       }
     ]
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 };

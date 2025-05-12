@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Topbar from '@/components/Home/Topbar';
-import GoToTop from '@/UI/GotoTop';
-import dynamic from 'next/dynamic';
+import { usePathname } from "next/navigation";
+import Topbar from "@/components/Home/Topbar";
+import GoToTop from "@/UI/GotoTop";
+import dynamic from "next/dynamic";
 
-const Footer = dynamic(() => import('@/components/Home/Footer'), { ssr: false });
+const Footer = dynamic(() => import("@/components/Home/Footer"), { ssr: false });
 
 export default function LayoutWrapper({ children }) {
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    // Routes where Topbar & Footer should be hidden
-    const noLayoutRoutes = ['/register', '/login'];
+  // Routes where Topbar & Footer should be hidden
+  const noLayoutRoutes = ["/register", "/login"];
 
-    const hideLayout = noLayoutRoutes.includes(pathname);
+  const hideLayout = noLayoutRoutes.includes(pathname);
 
-    return (
+  return (
+    <>
+      {!hideLayout && <Topbar />}
+      {children}
+      {!hideLayout && (
         <>
-            {!hideLayout && <Topbar />}
-            {children}
-            {!hideLayout && (
-                <>
-                    <GoToTop />
-                    <Footer />
-                </>
-            )}
+          <GoToTop />
+          <Footer />
         </>
-    );
+      )}
+    </>
+  );
 }

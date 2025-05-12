@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import axios from "axios";
@@ -9,9 +9,6 @@ const specializations = ["Cardiology", "Dermatology", "Neurology", "Pediatrics",
 const cities = ["Delhi", "Mumbai", "Bangalore", "Chennai", "Kolkata"];
 const times = Array.from({ length: 16 }, (_, i) => `${6 + i}:00`);
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-
-
 
 const Register = () => {
   const router = useRouter();
@@ -36,14 +33,14 @@ const Register = () => {
     city: "",
     consultationFee: "",
     about: "",
-    certificates: [],// doctor will upload file multiple files upto 10 in images
+    certificates: [], // doctor will upload file multiple files upto 10 in images
     availableSlots: weekdays.reduce((acc, day) => ({ ...acc, [day]: [] }), {}),
     qualification: ""
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
@@ -54,28 +51,26 @@ const Register = () => {
   const toggleDay = (day) => {
     setExpandedDays((prev) => ({
       ...prev,
-      [day]: !prev[day],
+      [day]: !prev[day]
     }));
   };
 
   const handleFileChange = (e, field, isMultiple = false) => {
     const files = Array.from(e.target.files);
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [field]: isMultiple ? files.slice(0, 10) : files[0]
     }));
   };
 
   const toggleSlot = (day, time) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const daySlots = prev.availableSlots[day];
       return {
         ...prev,
         availableSlots: {
           ...prev.availableSlots,
-          [day]: daySlots.includes(time)
-            ? daySlots.filter(t => t !== time)
-            : [...daySlots, time]
+          [day]: daySlots.includes(time) ? daySlots.filter((t) => t !== time) : [...daySlots, time]
         }
       };
     });
@@ -147,15 +142,14 @@ const Register = () => {
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/registerDoc`,
           form,
           {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" }
           }
         );
-      }
-      else if (userType === "patient") {
+      } else if (userType === "patient") {
         console.log(form);
         response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/patient/registerPatient`,
-          form,
+          form
         );
       }
 
@@ -163,24 +157,22 @@ const Register = () => {
         toast.success("Registration successful! Please login.");
         router.push("/login");
       }
-
-
-
-
     } catch (error) {
       console.error("Registration failed:", error.response?.data || error.message);
       toast.error("Registration failed");
-
     } finally {
       setIsLoading(false);
     }
   };
 
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-[500px] h-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">{userType === "patient" ? ("Join MediSetu: Care that comes to you") : ("Join MediSetu: Your expertise can save someone's life")}</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">
+          {userType === "patient"
+            ? "Join MediSetu: Care that comes to you"
+            : "Join MediSetu: Your expertise can save someone's life"}
+        </h2>
 
         <div className="flex justify-center mb-6">
           <button
@@ -252,7 +244,9 @@ const Register = () => {
                       focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="••••••••"
             />
-            <p className="text-xs text-gray-500">Use at least 8 characters with a mix of letters and numbers</p>
+            <p className="text-xs text-gray-500">
+              Use at least 8 characters with a mix of letters and numbers
+            </p>
           </div>
 
           {/* Doctor-specific fields */}
@@ -277,14 +271,23 @@ const Register = () => {
               </div>
 
               <div className="space-y-2">
-                <Select label="Specialization" name="specialization" value={formData.specialization} options={specializations} onChange={handleChange} className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
+                <Select
+                  label="Specialization"
+                  name="specialization"
+                  value={formData.specialization}
+                  options={specializations}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
                           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="Cardiology" />
-
+                  placeholder="Cardiology"
+                />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="yearsOfExperience" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="yearsOfExperience"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Years of Experience
                 </label>
                 <input
@@ -338,15 +341,22 @@ const Register = () => {
               </div>
 
               <div className="space-y-2">
-                <Select label="City" name="city" value={formData.city} options={cities} onChange={handleChange} className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
-                          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" />
-
-
-
+                <Select
+                  label="City"
+                  name="city"
+                  value={formData.city}
+                  options={cities}
+                  onChange={handleChange}
+                  className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
+                          focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="consultationFee" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="consultationFee"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Consultation Fee (₹)
                 </label>
                 <input
@@ -362,7 +372,12 @@ const Register = () => {
                   placeholder="1000"
                 />
               </div>
-              <Input label="Qualification" name="qualification" value={formData.qualification} onChange={handleChange} />
+              <Input
+                label="Qualification"
+                name="qualification"
+                value={formData.qualification}
+                onChange={handleChange}
+              />
               <div className="space-y-2">
                 <label htmlFor="about" className="block text-sm font-medium text-gray-700">
                   About You
@@ -380,11 +395,14 @@ const Register = () => {
                 />
               </div>
               <div className="space-y-2">
-                <FileInput label="Profile Picture" name="profilePic" onChange={(e) => handleFileChange(e, "profilePic")} />
+                <FileInput
+                  label="Profile Picture"
+                  name="profilePic"
+                  onChange={(e) => handleFileChange(e, "profilePic")}
+                />
                 {/* className="block w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 text-sm
                           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"  */}
               </div>
-
 
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
@@ -414,7 +432,7 @@ const Register = () => {
                         onClick={() => {
                           setFormData((prev) => ({
                             ...prev,
-                            certificates: prev.certificates.filter((_, i) => i !== index),
+                            certificates: prev.certificates.filter((_, i) => i !== index)
                           }));
                         }}
                         className="text-red-500 hover:underline text-sm"
@@ -430,7 +448,7 @@ const Register = () => {
                     onClick={() =>
                       setFormData((prev) => ({
                         ...prev,
-                        certificates: [...prev.certificates, null],
+                        certificates: [...prev.certificates, null]
                       }))
                     }
                     className="text-indigo-600 hover:underline text-sm"
@@ -439,48 +457,52 @@ const Register = () => {
                   </button>
                 )}
               </div>
-
             </>
           )}
-          {userType === "doctor" ? (<div>
-            <label className=" block text-sm font-medium text-gray-700 mb-2">
-              Available Slots
-            </label>
-            {weekdays.map((day) => (
-              <div key={day} className="mb-4 border rounded-md p-2 bg-gray-50">
-                <div
-                  className="flex justify-between items-center cursor-pointer"
-                  onClick={() => toggleDay(day)}
-                >
-                  <p className=" text-sm font-semibold text-gray-800">{day}</p>
-                  <button
-                    type="button"
-                    className="text-lg font-bold text-gray-600 focus:outline-none"
+          {userType === "doctor" ? (
+            <div>
+              <label className=" block text-sm font-medium text-gray-700 mb-2">
+                Available Slots
+              </label>
+              {weekdays.map((day) => (
+                <div key={day} className="mb-4 border rounded-md p-2 bg-gray-50">
+                  <div
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={() => toggleDay(day)}
                   >
-                    {expandedDays[day] ? "-" : "+"}
-                  </button>
-                </div>
-
-                {expandedDays[day] && (
-                  <div className="mt-2 grid grid-cols-4 gap-2">
-                    {times.map((time) => (
-                      <button
-                        type="button"
-                        key={time}
-                        className={`px-2 py-1 text-xs rounded-md border ${formData.availableSlots[day].includes(time)
-                          ? "bg-indigo-600 text-white"
-                          : "bg-white border-gray-300"
-                          }`}
-                        onClick={() => toggleSlot(day, time)}
-                      >
-                        {time}
-                      </button>
-                    ))}
+                    <p className=" text-sm font-semibold text-gray-800">{day}</p>
+                    <button
+                      type="button"
+                      className="text-lg font-bold text-gray-600 focus:outline-none"
+                    >
+                      {expandedDays[day] ? "-" : "+"}
+                    </button>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>) : ("")}
+
+                  {expandedDays[day] && (
+                    <div className="mt-2 grid grid-cols-4 gap-2">
+                      {times.map((time) => (
+                        <button
+                          type="button"
+                          key={time}
+                          className={`px-2 py-1 text-xs rounded-md border ${
+                            formData.availableSlots[day].includes(time)
+                              ? "bg-indigo-600 text-white"
+                              : "bg-white border-gray-300"
+                          }`}
+                          onClick={() => toggleSlot(day, time)}
+                        >
+                          {time}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            ""
+          )}
 
           <div className="flex items-center">
             <input
@@ -534,12 +556,15 @@ const Register = () => {
                 Registering...
               </>
             ) : (
-              `Register as ${userType === 'patient' ? 'Patient' : 'Doctor'}`
+              `Register as ${userType === "patient" ? "Patient" : "Doctor"}`
             )}
           </button>
 
           <p className="text-center text-sm text-gray-600">
-            Already have an account? <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">Sign in here</a>
+            Already have an account?{" "}
+            <a href="login" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Sign in here
+            </a>
           </p>
 
           <p className="text-xs text-center text-gray-500">
@@ -553,32 +578,68 @@ const Register = () => {
 
 const Input = ({ label, name, type = "text", ...rest }) => (
   <div className="space-y-1">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
-    <input id={name} name={name} type={type} className="w-full px-3 py-2 border border-gray-300 rounded-md" {...rest} />
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+      {...rest}
+    />
   </div>
 );
 
 const Select = ({ label, name, value, options, onChange }) => (
   <div className="space-y-1">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
-    <select name={name} value={value} onChange={onChange} className="w-full px-3 py-2 border border-gray-300 rounded-md">
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+    >
       <option value="">Select</option>
-      {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+      {options.map((opt) => (
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
+      ))}
     </select>
   </div>
 );
 
 const TextArea = ({ label, name, ...rest }) => (
   <div className="space-y-1">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
-    <textarea id={name} name={name} rows="3" className="w-full px-3 py-2 border border-gray-300 rounded-md" {...rest}></textarea>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <textarea
+      id={name}
+      name={name}
+      rows="3"
+      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+      {...rest}
+    ></textarea>
   </div>
 );
 
 const FileInput = ({ label, name, multiple = false, onChange }) => (
   <div className="space-y-1">
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
-    <input id={name} name={name} type="file" multiple={multiple} accept="image/*" onChange={onChange} />
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      {label}
+    </label>
+    <input
+      id={name}
+      name={name}
+      type="file"
+      multiple={multiple}
+      accept="image/*"
+      onChange={onChange}
+    />
   </div>
 );
 

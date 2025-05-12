@@ -14,7 +14,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   },
   {
@@ -23,7 +23,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Complete"
   },
   {
@@ -32,7 +32,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   },
   {
@@ -41,7 +41,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Complete"
   },
   {
@@ -50,7 +50,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   },
   {
@@ -59,7 +59,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Complete"
   },
   {
@@ -68,7 +68,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   },
   {
@@ -77,7 +77,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Complete"
   },
   {
@@ -86,7 +86,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   },
   {
@@ -95,7 +95,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Complete"
   },
   {
@@ -104,7 +104,7 @@ export const allAppointments = [
     specialization: "Dental",
     date: "05 Jun 2023",
     time: "4:30 PM",
-    chamber: india,
+    chamber: "india",
     status: "Pending"
   }
 ];

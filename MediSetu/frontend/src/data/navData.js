@@ -20,8 +20,9 @@ export const navData = [
   {
     label: "Contact Us",
     href: "/contactus"
-  }, {
+  },
+  {
     label: "Admin(testing)",
     href: "/admin"
-  },
+  }
 ];

@@ -62,9 +62,7 @@ const Doctors = () => {
         ) : topDoctors.length === 0 ? (
           <p className="text-red-500">No doctors found.</p>
         ) : (
-          topDoctors.map((doctor, index) => (
-            <DoctorsCard doctor={doctor} key={index} />
-          ))
+          topDoctors.map((doctor, index) => <DoctorsCard doctor={doctor} key={index} />)
         )}
       </div>
 

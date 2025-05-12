@@ -10,17 +10,18 @@ const Header = () => {
       <div className="md:w-1/2 flex flex-col justify-center">
         <div className="space-y-6">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-            MediSetu :  <span className="text-blue-500">A Bridge to Trusted Doctors,</span> Anytime, Anywhere.
+            MediSetu : <span className="text-blue-500">A Bridge to Trusted Doctors,</span> Anytime,
+            Anywhere.
           </h1>
-          <p className="text-gray-500 text-lg">
-            Because No Patient Should Feel Out of Reach.
-          </p>
-          <button onClick={() => router.push("/all-doctors")} className="flex items-center bg-blue-500 hover:bg-white hover:text-blue-500 text-white border hover:border-blue-500 rounded-lg font-semibold shadow-md transition duration-300 w-fit px-7 py-3 text-lg">
+          <p className="text-gray-500 text-lg">Because No Patient Should Feel Out of Reach.</p>
+          <button
+            onClick={() => router.push("/all-doctors")}
+            className="flex items-center bg-blue-500 hover:bg-white hover:text-blue-500 text-white border hover:border-blue-500 rounded-lg font-semibold shadow-md transition duration-300 w-fit px-7 py-3 text-lg"
+          >
             <span>Consult Doctors</span>
             <ArrowRight className="w-5 h-5" />
           </button>
         </div>
-
       </div>
 
       {/* Right Section */}

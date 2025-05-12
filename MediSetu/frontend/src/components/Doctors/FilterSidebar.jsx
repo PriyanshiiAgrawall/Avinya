@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Star } from "react-feather";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
   const router = useRouter();
@@ -22,7 +22,6 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
     fetchDoctors(); // Fetch default list
   };
 
-
   const buildParams = () => {
     const params = new URLSearchParams();
     if (feeRange) params.append("fee", feeRange.toString());
@@ -37,7 +36,9 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
     const params = buildParams();
     router.push(`/all-doctors?${params.toString()}`);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/filterDoctors?${params.toString()}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/filterDoctors?${params.toString()}`
+      );
       const data = await res.json();
       onDoctorsFetched(data.doctors);
       console.log(data);
@@ -52,10 +53,11 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
     }
   }, []);
   const handleRatingChange = (ratingValue) => {
-    setRating((prevRating) =>
-      prevRating.includes(ratingValue)
-        ? prevRating.filter((r) => r !== ratingValue) // Remove the rating if already selected
-        : [...prevRating, ratingValue] // Add the rating if not selected
+    setRating(
+      (prevRating) =>
+        prevRating.includes(ratingValue)
+          ? prevRating.filter((r) => r !== ratingValue) // Remove the rating if already selected
+          : [...prevRating, ratingValue] // Add the rating if not selected
     );
   };
 
@@ -65,7 +67,7 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
       city,
       rating,
       speciality,
-      yearsOfExperience,
+      yearsOfExperience
     });
   }, [feeRange, city, rating, speciality, yearsOfExperience]);
 
@@ -73,7 +75,9 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
     <div className="w-64 p-4 border-r">
       <div className="flex justify-between items-center mb-6">
         <h2 className="font-semibold">Filters</h2>
-        <button className="text-blue-500 text-sm" onClick={handleReset}>Reset</button>
+        <button className="text-blue-500 text-sm" onClick={handleReset}>
+          Reset
+        </button>
       </div>
 
       {/* Consultation Fee Slider */}
@@ -95,7 +99,9 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
       {/* city  Dropdown*/}
       <div className="mb-6">
         <h3 className="font-medium mb-3">City</h3>
-        <select value={city} onChange={(e) => setCity(e.target.value)}
+        <select
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           defaultValue="all"
         >
@@ -148,7 +154,6 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
           <option value="moradabad">Moradabad</option>
           <option value="noida">Noida</option>
           <option value="dehradun">Dehradun</option>
-
         </select>
       </div>
 
@@ -178,7 +183,9 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
       {
         <div className="mb-6">
           <h3 className="font-medium mb-3">Cpeciality</h3>
-          <select value={speciality} onChange={(e) => setSpeciality(e.target.value)}
+          <select
+            value={speciality}
+            onChange={(e) => setSpeciality(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             defaultValue="all"
           >
@@ -198,19 +205,23 @@ const FilterSidebar = ({ onFilterChange, onDoctorsFetched }) => {
         </div>
       }
       {/* Years of experience */}
-      {<div className="mb-6">
-        <h3 className="font-medium mb-3">Years of Experience</h3>
-        <select value={yearsOfExperience} onChange={(e) => setYearsOfExperience(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          defaultValue="all"
-        >
-          <option value="all">Any Experience</option>
-          <option value="1-3">1-3 years</option>
-          <option value="3-5">3-5 years</option>
-          <option value="5-10">5-10 years</option>
-          <option value="10+">10+ years</option>
-        </select>
-      </div>}
+      {
+        <div className="mb-6">
+          <h3 className="font-medium mb-3">Years of Experience</h3>
+          <select
+            value={yearsOfExperience}
+            onChange={(e) => setYearsOfExperience(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            defaultValue="all"
+          >
+            <option value="all">Any Experience</option>
+            <option value="1-3">1-3 years</option>
+            <option value="3-5">3-5 years</option>
+            <option value="5-10">5-10 years</option>
+            <option value="10+">10+ years</option>
+          </select>
+        </div>
+      }
       {/* apply filter button */}
       <div className="flex justify-center items-center">
         <button

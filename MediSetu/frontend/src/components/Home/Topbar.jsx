@@ -29,7 +29,7 @@ const Topbar = () => {
     localStorage.removeItem("token");
     setUser(null);
     router.push("/");
-  }
+  };
   const links = (
     <>
       {navData.map((item, index) => (
@@ -82,11 +82,12 @@ const Topbar = () => {
           {/* Dropdown */}
           {item?.dropdown && (
             <div
-              className={`w-48 left-0 top-6 mt-1 border rounded-sm transition-all duration-300 bg-white z-10 ${(item.label === "Pages" && pagesDropdownOpen) ||
+              className={`w-48 left-0 top-6 mt-1 border rounded-sm transition-all duration-300 bg-white z-10 ${
+                (item.label === "Pages" && pagesDropdownOpen) ||
                 (item.label === "Specialties" && speDropdownOpen)
-                ? "block"
-                : "hidden"
-                }`}
+                  ? "block"
+                  : "hidden"
+              }`}
             >
               {item?.dropdown?.map((dropdownItem, idx) => (
                 <div key={idx}>
@@ -174,7 +175,6 @@ const Topbar = () => {
             </>
           )}
         </div>
-
       </div>
 
       {/* Mobile Menu */}
@@ -187,7 +187,9 @@ const Topbar = () => {
             {user ? (
               <>
                 <Link
-                  href={user.role === "patient" ? `/patient?id=${user.id}` : `/doctor?id=${user.id}`}
+                  href={
+                    user.role === "patient" ? `/patient?id=${user.id}` : `/doctor?id=${user.id}`
+                  }
                   className="hover:bg-blue-500 hover:text-white px-4 py-2 rounded-md border font-semibold flex items-center gap-2 duration-300"
                 >
                   Profile
@@ -216,7 +218,6 @@ const Topbar = () => {
               </>
             )}
           </div>
-
         </div>
       )}
       {isModalOpen && <SignInAndSignUp setIsModalOpen={setIsModalOpen} />}

@@ -23,7 +23,9 @@ const SingleDoctor = ({ id }) => {
   useEffect(() => {
     const fetchDoctor = async () => {
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/getDoctor?docid=${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctor/getDoctor?docid=${id}`
+        );
         setDoctorData(response.data.doctor);
       } catch (error) {
         console.error("Error fetching doctor:", error);
@@ -148,8 +150,11 @@ const SingleDoctor = ({ id }) => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 text-sm font-medium capitalize ${activeTab === tab ? "border-b-2 border-blue-600 text-blue-600" : "text-gray-500 hover:text-gray-700"
-                  }`}
+                className={`px-6 py-3 text-sm font-medium capitalize ${
+                  activeTab === tab
+                    ? "border-b-2 border-blue-600 text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                }`}
               >
                 {tab}
               </button>
@@ -170,10 +175,11 @@ const SingleDoctor = ({ id }) => {
                       {["physical", "virtual"].map((mode) => (
                         <button
                           key={mode}
-                          className={`p-4 border rounded-lg text-center transition-colors ${consultationMode === mode
-                            ? "border-blue-500 bg-blue-50 text-blue-600"
-                            : "border-gray-300 hover:bg-gray-50"
-                            }`}
+                          className={`p-4 border rounded-lg text-center transition-colors ${
+                            consultationMode === mode
+                              ? "border-blue-500 bg-blue-50 text-blue-600"
+                              : "border-gray-300 hover:bg-gray-50"
+                          }`}
                           onClick={() => setConsultationMode(mode)}
                         >
                           <div className="flex flex-col items-center">
@@ -182,9 +188,13 @@ const SingleDoctor = ({ id }) => {
                             ) : (
                               <Video className="w-6 h-6 mb-2" />
                             )}
-                            <span>{mode === "physical" ? "Physical Visit" : "Virtual Consultation"}</span>
+                            <span>
+                              {mode === "physical" ? "Physical Visit" : "Virtual Consultation"}
+                            </span>
                             <p className="text-sm text-gray-500 mt-1">
-                              {mode === "physical" ? "Visit doctor's chamber" : "Video call with doctor"}
+                              {mode === "physical"
+                                ? "Visit doctor's chamber"
+                                : "Video call with doctor"}
                             </p>
                           </div>
                         </button>
@@ -207,10 +217,7 @@ const SingleDoctor = ({ id }) => {
                       </h3>
                       <div className="grid grid-cols-7 gap-1 mb-3">
                         {["S", "M", "T", "W", "T", "F", "S"].map((day) => (
-                          <div
-                            key={day}
-                            className="text-center text-sm font-medium text-gray-500"
-                          >
+                          <div key={day} className="text-center text-sm font-medium text-gray-500">
                             {day}
                           </div>
                         ))}
@@ -222,8 +229,9 @@ const SingleDoctor = ({ id }) => {
                         ).map((date) => (
                           <button
                             key={date}
-                            className={`h-10 rounded-full flex items-center justify-center ${date === selectedDate ? "bg-blue-500 text-white" : "hover:bg-gray-100"
-                              }`}
+                            className={`h-10 rounded-full flex items-center justify-center ${
+                              date === selectedDate ? "bg-blue-500 text-white" : "hover:bg-gray-100"
+                            }`}
                             onClick={() => {
                               setSelectedDate(date);
                               setSelectedTime(""); // reset time
@@ -252,7 +260,9 @@ const SingleDoctor = ({ id }) => {
                         ))}
                       </select>
                       {availableSlots.length === 0 && selectedDate !== null && (
-                        <p className="text-sm text-red-500 mt-2">No slots available on selected date</p>
+                        <p className="text-sm text-red-500 mt-2">
+                          No slots available on selected date
+                        </p>
                       )}
                     </div>
 
@@ -262,11 +272,14 @@ const SingleDoctor = ({ id }) => {
                         <h4 className="font-medium mb-2">Your Appointment</h4>
                         <p>
                           <strong>Date:</strong>{" "}
-                          {new Date(currentYear, currentMonth, selectedDate).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric"
-                          })}
+                          {new Date(currentYear, currentMonth, selectedDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric"
+                            }
+                          )}
                         </p>
                         <p>
                           <strong>Time:</strong> {selectedTime}
@@ -282,8 +295,6 @@ const SingleDoctor = ({ id }) => {
                       consultationMode={consultationMode}
                       consultationFee={doctorData.consultationFee}
                     />
-
-
                   </div>
                 </div>
               </div>
@@ -293,9 +304,7 @@ const SingleDoctor = ({ id }) => {
               <p className="text-gray-600">{doctorData.qualification}</p>
             )}
 
-            {activeTab === "reviews" && (
-              <p className="text-gray-600">Customer Reviews</p>
-            )}
+            {activeTab === "reviews" && <p className="text-gray-600">Customer Reviews</p>}
           </div>
         </div>
       </main>

@@ -24,7 +24,7 @@ const Login = () => {
     const payload = {
       email,
       password,
-      role,
+      role
     };
 
     try {
@@ -37,7 +37,7 @@ const Login = () => {
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload)
       });
 
       const data = await res.json();
@@ -47,7 +47,6 @@ const Login = () => {
         localStorage.setItem("token", data.accessToken);
         localStorage.setItem("user", JSON.stringify(data.user));
         router.push("/");
-
       } else {
         // Handle login failure
         toast.error(data.message || "Login failed");
@@ -69,23 +68,26 @@ const Login = () => {
           <button
             type="button"
             onClick={() => setRole("patient")}
-            className={`px-6 py-2 rounded-l-lg font-medium ${role === "patient" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+            className={`px-6 py-2 rounded-l-lg font-medium ${
+              role === "patient" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
           >
             I'm a Patient
           </button>
           <button
             type="button"
             onClick={() => setRole("doctor")}
-            className={`px-6 py-2 rounded-r-lg font-medium ${role === "doctor" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
-              }`}
+            className={`px-6 py-2 rounded-r-lg font-medium ${
+              role === "doctor" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"
+            }`}
           >
             I'm a Doctor
           </button>
         </div>
 
-
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-700 ">Welcome Back to <span className="text-blue-700">Medisetu</span></h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-700 ">
+          Welcome Back to <span className="text-blue-700">Medisetu</span>
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
@@ -147,8 +149,9 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isLoading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
             {isLoading ? (
               <>

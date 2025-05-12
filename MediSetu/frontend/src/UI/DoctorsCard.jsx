@@ -43,7 +43,6 @@ const DoctorsCard = ({ doctor }) => {
           width={500}
           height={500}
         />
-
       </div>
       <div className="text-center">
         <h3 className="font-semibold text-lg">{doctor.name}</h3>

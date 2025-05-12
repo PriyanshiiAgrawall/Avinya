@@ -18,7 +18,6 @@ const DoctorsPage = () => {
   };
 
   const handleFilterChange = (newFilters) => {
-
     setFilters(newFilters);
     if (!Array.isArray(originalDoctors)) {
       return; // or you can console.warn("Doctors not loaded yet");
@@ -38,12 +37,7 @@ const DoctorsPage = () => {
           ? getExperienceRange(doc.yearsOfExperience, newFilters.yearsOfExperience)
           : true;
 
-      return (
-        matchesFee &&
-        matchesArea &&
-        matchesSpecialist &&
-        matchesExperience
-      );
+      return matchesFee && matchesArea && matchesSpecialist && matchesExperience;
     });
 
     setFilteredDoctors(filtered);
@@ -68,16 +62,12 @@ const DoctorsPage = () => {
           />
           <main className="flex-1 p-6">
             <div className="mb-6">
-              <h1 className="text-xl font-semibold">
-                {size(filteredDoctors)} Doctors found
-              </h1>
+              <h1 className="text-xl font-semibold">{size(filteredDoctors)} Doctors found</h1>
             </div>
 
             <div className="space-y-4">
               {Array.isArray(filteredDoctors) && filteredDoctors.length > 0 ? (
-                filteredDoctors.map((doctor) => (
-                  <DoctorCard key={doctor._id} doctor={doctor} />
-                ))
+                filteredDoctors.map((doctor) => <DoctorCard key={doctor._id} doctor={doctor} />)
               ) : (
                 <p className="text-gray-500">No doctors found.</p>
               )}
