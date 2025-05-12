@@ -10,7 +10,7 @@
 - **🖥️ Project Presentation**: [PPT Link](https://drive.google.com/drive/u/3/folders/1wSKzjTc2U-w-hPHBsub9xZOj5yg9RQn1)
 - **📊 Workflow Diagram**:  
   ![Workflow Diagram](https://res.cloudinary.com/dop7kjln7/image/upload/v1747006073/ffk3em1bq0qiha0khsee.png)
-- **📽️ Project Demo**: _[Coming Soon]_
+- **📽️ Project Demo**: [Demo Video](https://drive.google.com/file/d/1aDq5ziUXWy-m-2vd5WnVo7bkY49fsfIg/view)
 
 ---
 
